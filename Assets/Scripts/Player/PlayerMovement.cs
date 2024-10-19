@@ -6,10 +6,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask tileLayer;
     private Vector3 _targetPosition;
     private bool _isMoving;
+    private TurnController _turnController;
 
     private void Start()
     {
         _isMoving = false;
+
+        _turnController = FindObjectOfType<TurnController>();
     }
 
     void Update()
@@ -30,9 +33,11 @@ public class PlayerMovement : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position,
             new Vector3(_targetPosition.x, transform.position.y, _targetPosition.z), moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, _targetPosition) < 0.1f)
+        if (Vector3.Distance(transform.position, _targetPosition) <= 0.5f)
         {
             _isMoving = false;
+
+            _turnController.MovePlayer();
         }
     }
 

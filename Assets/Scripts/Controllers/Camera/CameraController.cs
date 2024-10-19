@@ -12,16 +12,16 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (targets.Length == 0)
-            return;
-
-        _timer += Time.deltaTime;
-
-        if (_timer >= _switchInterval)
-        {
-            SwitchTarget();
-            _timer = 0f;
-        }
+        // if (targets.Length == 0)
+        //     return;
+        //
+        // _timer += Time.deltaTime;
+        //
+        // if (_timer >= _switchInterval)
+        // {
+        //     SwitchTarget();
+        //     _timer = 0f;
+        // }
 
         Vector3 desiredPosition = targets[_currentTargetIndex].position + offset;
 
@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
     }
 
-    private void SwitchTarget()
+    public void SwitchTarget()
     {
         _currentTargetIndex = (_currentTargetIndex + 1) % targets.Length;
 
