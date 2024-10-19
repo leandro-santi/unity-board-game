@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardGenerator : MonoBehaviour
 {
-    public GameObject hexTilePrefab; // Prefab do tile hexagonal
-    public int rows = 16; // Número de linhas
-    public int columns = 16; // Número de colunas
-    public float hexRadius = 1f; // Raio do hexágono
+    [SerializeField] private GameObject[] hexTilePrefabs;
+    [SerializeField] private int rows;
+    [SerializeField] private int columns;
+    [SerializeField] private float hexRadius;
 
     void Start()
     {
@@ -17,9 +15,8 @@ public class BoardGenerator : MonoBehaviour
     void GenerateHexBoard()
     {
         float hexWidth = hexRadius * 2f;
-        float hexHeight = Mathf.Sqrt(3f) * hexRadius; // Altura do hexágono
+        float hexHeight = Mathf.Sqrt(3f) * hexRadius;
 
-        // Calcular a posição inicial para centralizar o tabuleiro
         float boardWidth = columns * hexWidth * 0.75f;
         float boardHeight = rows * hexHeight;
 
@@ -30,20 +27,39 @@ public class BoardGenerator : MonoBehaviour
         {
             for (int col = 0; col < columns; col++)
             {
-                // Calcular a posição do tile com base no deslocamento
-                float xOffset = col * hexWidth * 0.75f; // 75% do diâmetro horizontal para o deslocamento
+                float xOffset = col * hexWidth * 0.75f;
                 float zOffset = row * hexHeight;
 
-                // Deslocar as linhas ímpares para criar o padrão
                 if (col % 2 == 1)
                 {
                     zOffset += hexHeight / 2f;
                 }
 
-                // Adicionar os offsets para centralizar o tabuleiro
                 Vector3 position = new Vector3(xOffset + offsetX, 0, zOffset + offsetZ);
-                Instantiate(hexTilePrefab, position, Quaternion.identity, transform);
+
+                int regionIndex = GetRegionIndex(row, rows);
+                GameObject selectedPrefab = hexTilePrefabs[regionIndex];
+
+                Instantiate(selectedPrefab, position, Quaternion.identity, transform);
             }
+        }
+    }
+
+    int GetRegionIndex(int row, int totalRows)
+    {
+        int regionSize = totalRows / 3;
+
+        if (row < regionSize)
+        {
+            return 0;
+        }
+        else if (row < 2 * regionSize)
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
         }
     }
 }
