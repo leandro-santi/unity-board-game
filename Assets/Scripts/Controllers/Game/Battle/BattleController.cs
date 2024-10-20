@@ -10,6 +10,8 @@ public class BattleController : MonoBehaviour
     public void StartBattle(PlayerMovement player1, PlayerMovement player2)
     {
         Debug.Log("Battle!");
+        
+        GetComponent<DiceController>().RollDice();
 
         List<int> player1Rolls = new List<int>();
         List<int> player2Rolls = new List<int>();

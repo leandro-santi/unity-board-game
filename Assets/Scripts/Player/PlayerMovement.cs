@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private LayerMask tileLayer;
     [SerializeField] private PlayerMovement enemyPlayer;
-    
+
     private Vector3 _targetPosition;
     private bool _isMoving;
     private TurnController _turnController;
@@ -50,13 +50,13 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(ray, out var hit, Mathf.Infinity, tileLayer))
         {
             Vector3 clickedTilePosition = hit.transform.position;
-            
+
             if (Vector3.Distance(transform.position, clickedTilePosition) <= 0.5f)
             {
                 Debug.Log("You are in this tile!");
                 return;
             }
-            
+
             if (Vector3.Distance(enemyPlayer.transform.position, clickedTilePosition) <= 0.5f)
             {
                 Debug.Log("The enemy is in this tile!");
