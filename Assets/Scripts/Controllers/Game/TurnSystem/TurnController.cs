@@ -87,6 +87,7 @@ public class TurnController : MonoBehaviour
 
         UpdateCurrentPlayerText();
         UpdateMoveText();
+        ShowChangingPlayerFeedback(true);
 
         cameraController.SwitchTarget();
 
@@ -94,6 +95,8 @@ public class TurnController : MonoBehaviour
 
         // Enable next currentPlayer movement after prepare delay
         playersMovementTurn[_currentPlayerIndex].enabled = true;
+
+        ShowChangingPlayerFeedback(false);
     }
 
     private IEnumerator OnBattleDelay(PlayerMovement currentPlayerMovement)
@@ -101,7 +104,11 @@ public class TurnController : MonoBehaviour
         _onBattle = true;
         currentPlayerMovement.enabled = false;
 
+        UIController.Instance.ShowBattleFeedbackText(true);
+
         yield return new WaitForSeconds(7f);
+
+        UIController.Instance.ShowBattleFeedbackText(false);
 
         currentPlayerMovement.enabled = true;
         _onBattle = false;
@@ -115,5 +122,10 @@ public class TurnController : MonoBehaviour
     private void UpdateMoveText()
     {
         UIController.Instance.UpdateRemainingMoves(_currentMoves);
+    }
+
+    private void ShowChangingPlayerFeedback(bool show)
+    {
+        UIController.Instance.ShowChangingPlayerText(show);
     }
 }

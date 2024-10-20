@@ -14,6 +14,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI player2PowerText;
     [SerializeField] private TextMeshProUGUI currentPlayerText;
     [SerializeField] private TextMeshProUGUI remainingMovesText;
+    [SerializeField] private TextMeshProUGUI changingPlayerText;
+    [SerializeField] private TextMeshProUGUI battleFeedbackText;
 
     private void Awake()
     {
@@ -59,5 +61,15 @@ public class UIController : MonoBehaviour
     public void UpdateRemainingMoves(int moves)
     {
         remainingMovesText.text = $"Moves: {moves}";
+    }
+
+    public void ShowChangingPlayerText(bool show)
+    {
+        changingPlayerText.gameObject.SetActive(show);
+    }
+
+    public void ShowBattleFeedbackText(bool show)
+    {
+        battleFeedbackText.gameObject.SetActive(show);
     }
 }
