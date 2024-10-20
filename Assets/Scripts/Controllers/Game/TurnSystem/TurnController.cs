@@ -3,21 +3,25 @@ using UnityEngine;
 
 public class TurnController : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement[] players;
+    [SerializeField] private PlayerMovement[] playersMovementTurn;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private BattleController battleController;
     [SerializeField] private int maxMovesPerTurn = 3;
 
-    private int _currentPlayerIndex = 0; // Can be 0 or 1
-    private int _currentMoves = 0;
-    private bool _onBattle = false;
+    private int _currentPlayerIndex; // Can be 0 or 1
+    private int _currentMoves;
+    private bool _onBattle;
 
     private void Start()
     {
-        players[_currentPlayerIndex].enabled = true;
+        _currentPlayerIndex = 0;
+        _currentMoves = 0;
+        _onBattle = false;
+
+        playersMovementTurn[_currentPlayerIndex].enabled = true;
     }
 
-    void Update()
+    private void Update()
     {
         if (_onBattle) return;
 
@@ -38,12 +42,12 @@ public class TurnController : MonoBehaviour
 
     private void CheckForBattle()
     {
-        PlayerMovement currentPlayer = players[_currentPlayerIndex];
-        PlayerMovement opponentPlayer = players[(_currentPlayerIndex + 1) % 2];
+        PlayerMovement currentPlayer = playersMovementTurn[_currentPlayerIndex];
+        PlayerMovement opponentPlayer = playersMovementTurn[(_currentPlayerIndex + 1) % 2];
 
         if (AreAdjacent(currentPlayer.transform.position, opponentPlayer.transform.position))
         {
-            battleController.StartBattle(currentPlayer, opponentPlayer);
+            battleController.StartBattle();
 
             StartCoroutine(OnBattleDelay(currentPlayer));
         }
@@ -58,7 +62,7 @@ public class TurnController : MonoBehaviour
     {
         _currentMoves = 0;
 
-        players[_currentPlayerIndex].enabled = false;
+        playersMovementTurn[_currentPlayerIndex].enabled = false;
 
         _currentPlayerIndex = (_currentPlayerIndex + 1) % 2;
 
@@ -67,9 +71,9 @@ public class TurnController : MonoBehaviour
 
     private void SetNextPlayer()
     {
-        Debug.Log("SetCurrentPlayer: " + _currentPlayerIndex);
+        // Debug.Log("SetCurrentPlayer: " + _currentPlayerIndex);
 
-        players[_currentPlayerIndex].enabled = true;
+        playersMovementTurn[_currentPlayerIndex].enabled = true;
 
         StartCoroutine(SetNextPlayerDelay());
     }
@@ -81,14 +85,14 @@ public class TurnController : MonoBehaviour
         cameraController.SwitchTarget();
     }
 
-    private IEnumerator OnBattleDelay(PlayerMovement player)
+    private IEnumerator OnBattleDelay(PlayerMovement currentPlayerMovement)
     {
         _onBattle = true;
-        player.enabled = false;
+        currentPlayerMovement.enabled = false;
 
         yield return new WaitForSeconds(2f);
 
-        player.enabled = true;
+        currentPlayerMovement.enabled = true;
         _onBattle = false;
     }
 }

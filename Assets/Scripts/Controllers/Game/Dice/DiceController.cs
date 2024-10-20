@@ -1,65 +1,95 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DiceController : MonoBehaviour
 {
-    [SerializeField] private GameObject diceType1Prefab;
-    [SerializeField] private GameObject diceType2Prefab;
-    [SerializeField] private Transform spawnPosition;
-    [SerializeField] private float rollForce = 10f;
-    [SerializeField] private float waitTime = 3f;
-    
-    private GameObject[] allDice;
-    
+    [SerializeField] private GameObject[] dicesPlayer1;
+    [SerializeField] private GameObject[] dicesPlayer2;
+    [SerializeField] private Transform diceSpawnPosition;
+    [SerializeField] private float rollForce;
+    [SerializeField] private float diceRollWaitTime;
+
+    private GameObject[] _allDices;
+    private List<int> _player1Results;
+    private List<int> _player2Results;
+
     public void RollDice()
     {
-        allDice = new GameObject[6];
-        SpawnDice(diceType1Prefab, 0);
-        SpawnDice(diceType2Prefab, 3);
-        
+        _allDices = new GameObject[6];
+        _player1Results = new List<int>();
+        _player2Results = new List<int>();
+
+        ActivateDice(dicesPlayer1, 0);
+        ActivateDice(dicesPlayer2, 3);
+
         StartCoroutine(RollAllDice());
     }
 
-    private void SpawnDice(GameObject dicePrefab, int startIndex)
+    private void ActivateDice(GameObject[] diceArray, int startIndex)
     {
         for (int i = 0; i < 3; i++)
         {
+            GameObject dice = diceArray[i];
             Vector3 offset = new Vector3(i * 1.5f, 0, 0);
-            allDice[startIndex + i] = Instantiate(dicePrefab, spawnPosition.position + offset, Random.rotation);
+            dice.transform.position = diceSpawnPosition.position + offset;
+            dice.transform.rotation = Random.rotation;
+            dice.SetActive(true);
+            _allDices[startIndex + i] = dice;
         }
     }
 
     private IEnumerator RollAllDice()
     {
-        foreach (var dice in allDice)
+        foreach (var dice in _allDices)
         {
-            RollSingleDie(dice);
+            RollSingleDice(dice);
         }
-        
-        yield return new WaitForSeconds(waitTime);
-        
+
+        yield return new WaitForSeconds(diceRollWaitTime);
+
         GetDiceResults();
+
+        yield return new WaitForSeconds(diceRollWaitTime);
+
+        DeactivateAllDice();
     }
 
-    private void RollSingleDie(GameObject die)
+    private void RollSingleDice(GameObject dice)
     {
-        Rigidbody rb = die.GetComponent<Rigidbody>();
+        Rigidbody rb = dice.GetComponent<Rigidbody>();
         rb.AddForce(Vector3.up * rollForce + Random.insideUnitSphere * rollForce, ForceMode.Impulse);
         rb.AddTorque(Random.insideUnitSphere * rollForce, ForceMode.Impulse);
     }
 
-    private void GetDiceResults()
+    private void DeactivateAllDice()
     {
-        foreach (var die in allDice)
+        foreach (var dice in _allDices)
         {
-            // DiceFaceReader faceReader = die.GetComponent<DiceFaceReader>();
-            // int topValue = faceReader.GetTopFaceValue();
-            // Debug.Log($"Dado {die.name} parou com a face {topValue} para cima.");
+            dice.SetActive(false);
         }
     }
-    
-    public int Roll()
+
+    private void GetDiceResults()
     {
-        return Random.Range(1, 7);
+        for (int i = 0; i < _allDices.Length; i++)
+        {
+            DiceFaceReader faceReader = _allDices[i].GetComponent<DiceFaceReader>();
+            int topValue = faceReader.GetTopFaceValue();
+
+            if (i < 3)
+            {
+                _player1Results.Add(topValue);
+            }
+            else
+            {
+                _player2Results.Add(topValue);
+            }
+        }
+    }
+
+    public List<int> ReturnDiceResults(int playerIndex)
+    {
+        return playerIndex == 0 ? _player1Results : _player2Results;
     }
 }

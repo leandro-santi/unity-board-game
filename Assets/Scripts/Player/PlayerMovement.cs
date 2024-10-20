@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
         _turnController = FindObjectOfType<TurnController>();
     }
 
-    void Update()
+    private void Update()
     {
         if (_isMoving)
         {

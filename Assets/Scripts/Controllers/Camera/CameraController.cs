@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -5,24 +6,17 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform[] targets;
     [SerializeField] private float smoothSpeed;
     [SerializeField] private Vector3 offset;
-    private int _currentTargetIndex = 0;
-    private float _switchInterval = 20f; // Debug variable
-    private float _timer = 0f;
-    private float _rotationSpeed = 2f;
+    [SerializeField] private float rotationSpeed;
 
-    void LateUpdate()
+    private int _currentTargetIndex;
+
+    private void Start()
     {
-        // if (targets.Length == 0)
-        //     return;
-        //
-        // _timer += Time.deltaTime;
-        //
-        // if (_timer >= _switchInterval)
-        // {
-        //     SwitchTarget();
-        //     _timer = 0f;
-        // }
+        _currentTargetIndex = 0;
+    }
 
+    private void LateUpdate()
+    {
         Vector3 desiredPosition = targets[_currentTargetIndex].position + offset;
 
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
@@ -31,7 +25,7 @@ public class CameraController : MonoBehaviour
         Vector3 lookAtPosition = targets[_currentTargetIndex].position;
 
         Quaternion targetRotation = Quaternion.LookRotation(lookAtPosition - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
     public void SwitchTarget()

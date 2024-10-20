@@ -7,20 +7,21 @@ public class BattleController : MonoBehaviour
 {
     [SerializeField] private DiceController diceController;
 
-    public void StartBattle(PlayerMovement player1, PlayerMovement player2)
+    public void StartBattle()
     {
         Debug.Log("Battle!");
-        
+
         GetComponent<DiceController>().RollDice();
 
-        List<int> player1Rolls = new List<int>();
-        List<int> player2Rolls = new List<int>();
+        StartCoroutine(BattleResults());
+    }
 
-        for (int i = 0; i < 3; i++)
-        {
-            player1Rolls.Add(diceController.Roll());
-            player2Rolls.Add(diceController.Roll());
-        }
+    private IEnumerator BattleResults()
+    {
+        yield return new WaitForSeconds(5f);
+
+        List<int> player1Rolls = diceController.ReturnDiceResults(0);
+        List<int> player2Rolls = diceController.ReturnDiceResults(1);
 
         player1Rolls = player1Rolls.OrderByDescending(x => x).ToList();
         player2Rolls = player2Rolls.OrderByDescending(x => x).ToList();
