@@ -15,17 +15,20 @@ public class TurnController : MonoBehaviour
     private void Start()
     {
         _currentPlayerIndex = 0;
-        _currentMoves = 0;
+        _currentMoves = maxMovesPerTurn;
         _onBattle = false;
 
         playersMovementTurn[_currentPlayerIndex].enabled = true;
+
+        UpdateCurrentPlayerText();
+        UpdateMoveText();
     }
 
     private void Update()
     {
-        if (_onBattle) return;
+        if (GameController.Instance.isGameOver || _onBattle) return;
 
-        if (_currentMoves >= maxMovesPerTurn)
+        if (_currentMoves <= 0)
         {
             EndTurn();
         }
@@ -33,11 +36,14 @@ public class TurnController : MonoBehaviour
 
     public void MovePlayer()
     {
-        _currentMoves++;
+        if (_currentMoves > 0)
+        {
+            _currentMoves--;
 
-        // Debug.Log("Current: " + _currentMoves);
+            UpdateMoveText();
 
-        CheckForBattle();
+            CheckForBattle();
+        }
     }
 
     private void CheckForBattle()
@@ -47,7 +53,7 @@ public class TurnController : MonoBehaviour
 
         if (AreAdjacent(currentPlayer.transform.position, opponentPlayer.transform.position))
         {
-            battleController.StartBattle();
+            battleController.StartBattle(currentPlayer, opponentPlayer);
 
             StartCoroutine(OnBattleDelay(currentPlayer));
         }
@@ -60,10 +66,11 @@ public class TurnController : MonoBehaviour
 
     private void EndTurn()
     {
-        _currentMoves = 0;
+        _currentMoves = maxMovesPerTurn;
 
         playersMovementTurn[_currentPlayerIndex].enabled = false;
 
+        // Updating current player
         _currentPlayerIndex = (_currentPlayerIndex + 1) % 2;
 
         SetNextPlayer();
@@ -71,10 +78,6 @@ public class TurnController : MonoBehaviour
 
     private void SetNextPlayer()
     {
-        // Debug.Log("SetCurrentPlayer: " + _currentPlayerIndex);
-
-        playersMovementTurn[_currentPlayerIndex].enabled = true;
-
         StartCoroutine(SetNextPlayerDelay());
     }
 
@@ -82,7 +85,18 @@ public class TurnController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
+        UpdateCurrentPlayerText();
+        UpdateMoveText();
+        ShowChangingPlayerFeedback(true);
+
         cameraController.SwitchTarget();
+
+        yield return new WaitForSeconds(5f);
+
+        // Enable next currentPlayer movement after prepare delay
+        playersMovementTurn[_currentPlayerIndex].enabled = true;
+
+        ShowChangingPlayerFeedback(false);
     }
 
     private IEnumerator OnBattleDelay(PlayerMovement currentPlayerMovement)
@@ -90,9 +104,29 @@ public class TurnController : MonoBehaviour
         _onBattle = true;
         currentPlayerMovement.enabled = false;
 
-        yield return new WaitForSeconds(2f);
+        UIController.Instance.ShowBattleFeedbackText(true);
+
+        yield return new WaitForSeconds(7f);
+
+        UIController.Instance.ShowBattleFeedbackText(false);
+        UIController.Instance.ShowBattleStatsPanel(false);
 
         currentPlayerMovement.enabled = true;
         _onBattle = false;
+    }
+
+    private void UpdateCurrentPlayerText()
+    {
+        UIController.Instance.UpdateCurrentPlayer(_currentPlayerIndex + 1);
+    }
+
+    private void UpdateMoveText()
+    {
+        UIController.Instance.UpdateRemainingMoves(_currentMoves);
+    }
+
+    private void ShowChangingPlayerFeedback(bool show)
+    {
+        UIController.Instance.ShowChangingPlayerText(show);
     }
 }
