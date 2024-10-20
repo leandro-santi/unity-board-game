@@ -131,6 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 35150247}
+  - component: {fileID: 35150248}
   m_Layer: 0
   m_Name: DiceSpawner
   m_TagString: Untagged
@@ -153,6 +154,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 877769542}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &35150248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35150246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d32d23b3cabb74caf7f1cafec32d87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnHeightOffset: 2
 --- !u!1 &41332025
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,8 +317,8 @@ MonoBehaviour:
   targets:
   - {fileID: 1379357370}
   - {fileID: 732950843}
-  smoothSpeed: 0.01
-  offset: {x: 0, y: 3, z: 4}
+  smoothSpeed: 0.02
+  offset: {x: 0, y: 4, z: 4}
   rotationSpeed: 5
 --- !u!1001 &261132432
 PrefabInstance:
@@ -316,15 +330,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -517,6 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceController: {fileID: 405310571}
+  diceSpawnerPositionHandler: {fileID: 35150248}
 --- !u!114 &405310571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,15 +598,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -866,7 +881,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 60bc1e3d969d054eaaca203e3f77a1ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -960,15 +975,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1214,7 +1229,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bfe4556fdceef1b14aa8012b5d5aa94a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1301,15 +1316,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1531,15 +1546,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2728342952153535978, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1694,15 +1709,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1866012169412075513, guid: 0be3abf5f889cbc02bd3fd6135f250fc, type: 3}
       propertyPath: m_LocalPosition.x

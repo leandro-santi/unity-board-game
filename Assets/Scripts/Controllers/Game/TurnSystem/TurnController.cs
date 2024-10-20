@@ -47,7 +47,7 @@ public class TurnController : MonoBehaviour
 
         if (AreAdjacent(currentPlayer.transform.position, opponentPlayer.transform.position))
         {
-            battleController.StartBattle();
+            battleController.StartBattle(currentPlayer);
 
             StartCoroutine(OnBattleDelay(currentPlayer));
         }

@@ -6,10 +6,13 @@ using UnityEngine;
 public class BattleController : MonoBehaviour
 {
     [SerializeField] private DiceController diceController;
+    [SerializeField] private DiceSpawnerPositionHandler diceSpawnerPositionHandler;
 
-    public void StartBattle()
+    public void StartBattle(PlayerMovement currentPlayer)
     {
         Debug.Log("Battle!");
+
+        diceSpawnerPositionHandler.SetDiceSpawnPositionBeforeBattle(currentPlayer.transform);
 
         GetComponent<DiceController>().RollDice();
 
