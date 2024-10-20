@@ -7,19 +7,20 @@ public class BattleController : MonoBehaviour
 {
     [SerializeField] private DiceController diceController;
     [SerializeField] private DiceSpawnerPositionHandler diceSpawnerPositionHandler;
+    [SerializeField] private Player[] players;
 
-    public void StartBattle(PlayerMovement currentPlayer)
+    public void StartBattle(PlayerMovement currentPlayer, PlayerMovement opponentPlayer)
     {
         Debug.Log("Battle!");
 
         diceSpawnerPositionHandler.SetDiceSpawnPositionBeforeBattle(currentPlayer.transform);
 
-        GetComponent<DiceController>().RollDice();
+        diceController.RollDice();
 
-        StartCoroutine(BattleResults());
+        StartCoroutine(BattleResults(currentPlayer, opponentPlayer));
     }
 
-    private IEnumerator BattleResults()
+    private IEnumerator BattleResults(PlayerMovement currentPlayer, PlayerMovement opponentPlayer)
     {
         yield return new WaitForSeconds(5f);
 
@@ -49,15 +50,24 @@ public class BattleController : MonoBehaviour
 
         if (player1Score > player2Score)
         {
-            Debug.Log("Player 1 Wins the Battle!");
+            // Player 1 wins battle
+            ApplyDamage(players[1], players[0].GetCurrentAttackPower()); // Player2 suffers damage
         }
         else if (player2Score > player1Score)
         {
-            Debug.Log("Player 2 Wins the Battle!");
+            // Player 2 wins battle
+            ApplyDamage(players[0], players[1].GetCurrentAttackPower()); // Player1 suffers damage
         }
         else
         {
-            Debug.Log("It's a Tie!");
+            // Draw -> The current player of the turn wins battle
+            ApplyDamage(opponentPlayer.GetComponent<Player>(), // Opponent player of the turn suffers damage
+                currentPlayer.GetComponent<Player>().GetCurrentAttackPower());
         }
+    }
+
+    private void ApplyDamage(Player target, int damage)
+    {
+        target.TakeDamage(damage);
     }
 }

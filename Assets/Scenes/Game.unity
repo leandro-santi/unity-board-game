@@ -532,6 +532,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diceController: {fileID: 405310571}
   diceSpawnerPositionHandler: {fileID: 35150248}
+  players:
+  - {fileID: 1379357372}
+  - {fileID: 732950848}
 --- !u!114 &405310571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,6 +821,7 @@ GameObject:
   - component: {fileID: 732950845}
   - component: {fileID: 732950844}
   - component: {fileID: 732950847}
+  - component: {fileID: 732950848}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
@@ -928,6 +932,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   enemyPlayer: {fileID: 1379357371}
+--- !u!114 &732950848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732950842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177c1feeb3b066920855f80b89e7b0a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  attackPower: 10
 --- !u!4 &794472120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8499882579185652927, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
@@ -1181,6 +1199,7 @@ GameObject:
   - component: {fileID: 1379357368}
   - component: {fileID: 1379357367}
   - component: {fileID: 1379357371}
+  - component: {fileID: 1379357372}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -1291,6 +1310,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   enemyPlayer: {fileID: 732950847}
+--- !u!114 &1379357372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379357366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177c1feeb3b066920855f80b89e7b0a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  attackPower: 10
 --- !u!4 &1416984804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1527625970045707648, guid: 51271aa650fabfa4f927912875b90d60, type: 3}
