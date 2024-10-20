@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private int playerIndex;
     [SerializeField] private int health;
     [SerializeField] private int attackPower;
 
@@ -10,23 +11,38 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _currentHealth = health;
+
+        UpdateHpText();
+        UpdatePowerText();
     }
 
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
-        Debug.Log($"{gameObject.name} was attacked with {damage}. current health: {_currentHealth}");
+
+        UpdateHpText();
     }
 
     public void Heal(int healAmount)
     {
         _currentHealth += healAmount;
         _currentHealth = Mathf.Min(_currentHealth, health);
-        Debug.Log($"{gameObject.name} was healed {healAmount}. current health: {_currentHealth}");
+
+        UpdateHpText();
     }
 
     public int GetCurrentAttackPower()
     {
         return attackPower;
+    }
+
+    private void UpdateHpText()
+    {
+        UIController.Instance.UpdatePlayerHp(playerIndex, _currentHealth);
+    }
+
+    private void UpdatePowerText()
+    {
+        UIController.Instance.UpdatePlayerPower(playerIndex, attackPower);
     }
 }
