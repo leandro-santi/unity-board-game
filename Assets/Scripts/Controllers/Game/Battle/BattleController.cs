@@ -35,6 +35,7 @@ public class BattleController : MonoBehaviour
 
         int player1Score = 0;
         int player2Score = 0;
+        string winner = "";
 
         for (int i = 0; i < 3; i++)
         {
@@ -52,18 +53,27 @@ public class BattleController : MonoBehaviour
         {
             // Player 1 wins battle
             ApplyDamage(players[1], players[0].GetCurrentAttackPower()); // Player2 suffers damage
+
+            winner = "Player 1";
         }
         else if (player2Score > player1Score)
         {
             // Player 2 wins battle
             ApplyDamage(players[0], players[1].GetCurrentAttackPower()); // Player1 suffers damage
+
+            winner = "Player 2";
         }
         else
         {
             // Draw -> The current player of the turn wins battle
             ApplyDamage(opponentPlayer.GetComponent<Player>(), // Opponent player of the turn suffers damage
                 currentPlayer.GetComponent<Player>().GetCurrentAttackPower());
+
+            winner = "Player " + currentPlayer.GetComponent<Player>().GetPlayerIndex();
         }
+
+        UIController.Instance.UpdateBattleStats(player1Rolls, player2Rolls, winner);
+        UIController.Instance.ShowBattleStatsPanel(true);
     }
 
     private void ApplyDamage(Player target, int damage)

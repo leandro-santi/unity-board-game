@@ -16,8 +16,11 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI remainingMovesText;
     [SerializeField] private TextMeshProUGUI changingPlayerText;
     [SerializeField] private TextMeshProUGUI battleFeedbackText;
+    [SerializeField] private TextMeshProUGUI winnerBattleText;
+    [SerializeField] private TextMeshProUGUI diceBattleText;
     [SerializeField] private TextMeshProUGUI winnerText;
     [SerializeField] private GameObject winnerPanel;
+    [SerializeField] private GameObject battleStatsPanel;
 
     private void Awake()
     {
@@ -79,5 +82,20 @@ public class UIController : MonoBehaviour
     {
         winnerText.text = $"Player {playerIndex} Wins!";
         winnerPanel.SetActive(true);
+    }
+
+    public void UpdateBattleStats(List<int> player1Rolls, List<int> player2Rolls, string winnerBattle)
+    {
+        string player1RollsText = string.Join(", ", player1Rolls);
+        string player2RollsText = string.Join(", ", player2Rolls);
+
+        diceBattleText.text = $"Player 1: [{player1RollsText}] x Player 2: [{player2RollsText}]";
+
+        winnerBattleText.text = $"{winnerBattle} Wins the Battle!";
+    }
+
+    public void ShowBattleStatsPanel(bool show)
+    {
+        battleStatsPanel.SetActive(show);
     }
 }

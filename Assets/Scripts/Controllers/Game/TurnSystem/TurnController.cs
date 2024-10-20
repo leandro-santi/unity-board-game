@@ -109,6 +109,7 @@ public class TurnController : MonoBehaviour
         yield return new WaitForSeconds(7f);
 
         UIController.Instance.ShowBattleFeedbackText(false);
+        UIController.Instance.ShowBattleStatsPanel(false);
 
         currentPlayerMovement.enabled = true;
         _onBattle = false;

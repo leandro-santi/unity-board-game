@@ -41,6 +41,11 @@ public class Player : MonoBehaviour
         return attackPower;
     }
 
+    public int GetPlayerIndex()
+    {
+        return playerIndex;
+    }
+
     private void UpdateHpText()
     {
         UIController.Instance.UpdatePlayerHp(playerIndex, _currentHealth);
