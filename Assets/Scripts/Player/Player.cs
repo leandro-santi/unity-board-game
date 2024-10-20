@@ -21,6 +21,11 @@ public class Player : MonoBehaviour
         _currentHealth -= damage;
 
         UpdateHpText();
+
+        if (_currentHealth <= 0)
+        {
+            GameController.Instance.onPlayerWin?.Invoke((playerIndex) % 2);
+        }
     }
 
     public void Heal(int healAmount)

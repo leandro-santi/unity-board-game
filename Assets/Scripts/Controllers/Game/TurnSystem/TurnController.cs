@@ -26,7 +26,7 @@ public class TurnController : MonoBehaviour
 
     private void Update()
     {
-        if (_onBattle) return;
+        if (GameController.Instance.isGameOver || _onBattle) return;
 
         if (_currentMoves <= 0)
         {

@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (GameController.Instance.isGameOver) return;
+
         if (_isMoving)
         {
             MovePlayer();

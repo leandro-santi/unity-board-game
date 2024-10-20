@@ -16,6 +16,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI remainingMovesText;
     [SerializeField] private TextMeshProUGUI changingPlayerText;
     [SerializeField] private TextMeshProUGUI battleFeedbackText;
+    [SerializeField] private TextMeshProUGUI winnerText;
+    [SerializeField] private GameObject winnerPanel;
 
     private void Awake()
     {
@@ -71,5 +73,11 @@ public class UIController : MonoBehaviour
     public void ShowBattleFeedbackText(bool show)
     {
         battleFeedbackText.gameObject.SetActive(show);
+    }
+
+    public void EndGame(int playerIndex)
+    {
+        winnerText.text = $"Player {playerIndex} Wins!";
+        winnerPanel.SetActive(true);
     }
 }
