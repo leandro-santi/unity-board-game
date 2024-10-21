@@ -30,10 +30,9 @@ public class GameController : MonoBehaviour
         isGameOver = false;
     }
 
+    // Win event to be observed and called by the players
     private void HandlePlayerWin(int playerIndex)
     {
-        Debug.Log($"Player {playerIndex + 1} wins!");
-
         UIController.Instance.EndGame(playerIndex + 1);
 
         // Stop game runtime

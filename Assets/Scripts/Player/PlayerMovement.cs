@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
             MovePlayer();
         }
 
+        // The movement is with the mouse click at hexagons
+        // orthogonally to each adjacent tile upon mouse click.
         if (Input.GetMouseButtonDown(0))
         {
             HandleMouseClick();
@@ -61,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Vector3.Distance(enemyPlayer.transform.position, clickedTilePosition) <= 0.5f)
             {
-                Debug.Log("The enemy is in this tile!");
+                Debug.Log("The enemy is in that tile!");
                 return;
             }
 

@@ -12,6 +12,7 @@ public class DiceFaceReader : MonoBehaviour
 
         for (int i = 0; i < faceTransforms.Length; i++)
         {
+            // Seeing witch dice face is in the same way with the up axis (Y)
             float dot = Vector3.Dot(faceTransforms[i].up, Vector3.up);
             if (dot > maxDot)
             {

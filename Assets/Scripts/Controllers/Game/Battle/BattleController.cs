@@ -11,12 +11,15 @@ public class BattleController : MonoBehaviour
 
     public void StartBattle(PlayerMovement currentPlayer, PlayerMovement opponentPlayer)
     {
-        Debug.Log("Battle!");
+        // Debug.Log("Battle!");
 
+        // Setting the dice to spawn above the current player position
         diceSpawnerPositionHandler.SetDiceSpawnPositionBeforeBattle(currentPlayer.transform);
 
+        // Calling the dice roll
         diceController.RollDice();
 
+        // A coroutine with delay to wait the dice lay on the ground to get the results
         StartCoroutine(BattleResults(currentPlayer, opponentPlayer));
     }
 
@@ -78,6 +81,7 @@ public class BattleController : MonoBehaviour
 
     private void ApplyDamage(Player target, int damage)
     {
+        // Applying damage in the defeated target
         target.TakeDamage(damage);
     }
 }

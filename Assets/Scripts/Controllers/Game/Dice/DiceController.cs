@@ -43,15 +43,18 @@ public class DiceController : MonoBehaviour
     {
         foreach (var dice in _allDices)
         {
+            // Rolling each dice per time
             RollSingleDice(dice);
         }
 
         yield return new WaitForSeconds(diceRollWaitTime);
 
+        // Getting the dice face up results
         GetDiceResults();
 
         yield return new WaitForSeconds(diceRollWaitTime);
 
+        // Deactivating all the dices to wait another battle
         DeactivateAllDice();
     }
 
@@ -75,7 +78,7 @@ public class DiceController : MonoBehaviour
         for (int i = 0; i < _allDices.Length; i++)
         {
             DiceFaceReader faceReader = _allDices[i].GetComponent<DiceFaceReader>();
-            int topValue = faceReader.GetTopFaceValue();
+            int topValue = faceReader.GetTopFaceValue(); // Recovering dice face value
 
             if (i < 3)
             {

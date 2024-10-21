@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurnCollectible : Collectible
@@ -13,7 +11,7 @@ public class TurnCollectible : Collectible
         {
             other.gameObject.GetComponent<Player>().AddExtraTurn(turnIncrease);
 
-            // PlayEffect();
+            // PlayEffect(); // PlayEffect(); -> Future effects implementation
 
             gameObject.SetActive(false);
             Destroy(gameObject, 0.5f);
