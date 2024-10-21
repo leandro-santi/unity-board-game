@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class TurnController : MonoBehaviour
 {
+    public static TurnController Instance { get; private set; }
+
     [SerializeField] private PlayerMovement[] playersMovementTurn;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private BattleController battleController;
@@ -11,6 +13,18 @@ public class TurnController : MonoBehaviour
     private int _currentPlayerIndex; // Can be 0 or 1
     private int _currentMoves;
     private bool _onBattle;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -69,6 +83,7 @@ public class TurnController : MonoBehaviour
         _currentMoves = maxMovesPerTurn;
 
         playersMovementTurn[_currentPlayerIndex].enabled = false;
+        playersMovementTurn[_currentPlayerIndex].GetComponent<Player>().ResetAttackPower();
 
         // Updating current player
         _currentPlayerIndex = (_currentPlayerIndex + 1) % 2;
@@ -128,5 +143,12 @@ public class TurnController : MonoBehaviour
     private void ShowChangingPlayerFeedback(bool show)
     {
         UIController.Instance.ShowChangingPlayerText(show);
+    }
+
+    public void AddExtraTurn()
+    {
+        _currentMoves++;
+
+        UpdateMoveText();
     }
 }

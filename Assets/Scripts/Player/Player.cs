@@ -7,10 +7,12 @@ public class Player : MonoBehaviour
     [SerializeField] private int attackPower;
 
     private int _currentHealth;
+    private int _maxAttackPower;
 
     private void Start()
     {
         _currentHealth = health;
+        _maxAttackPower = attackPower;
 
         UpdateHpText();
         UpdatePowerText();
@@ -44,11 +46,16 @@ public class Player : MonoBehaviour
         UpdatePowerText();
     }
 
+    public void ResetAttackPower()
+    {
+        attackPower = _maxAttackPower;
+
+        UpdatePowerText();
+    }
+
     public void AddExtraTurn(int turn)
     {
-        // attackPower += attack;
-        Debug.Log("Added extra turn");
-        UpdatePowerText();
+        TurnController.Instance.AddExtraTurn();
     }
 
     public int GetCurrentAttackPower()
