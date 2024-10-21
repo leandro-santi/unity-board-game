@@ -1,0 +1,151 @@
+This notes aims to be a project tracking to my sidia's test development.
+
+I will be tracking the ideias, concepts, hours spended, pull requests and tasks priorities.
+
+
+What I have to do?
+	-> a 3D board game in 48h
+	
+
+What is the tasks?
+	-> Menu
+		✅️ Menu to enter in the game.
+		❌️ (Bonus) Resolution options, sound options.
+	
+	-> Board Creation
+		✅️ The basic is a 16x16 board with square tiles.
+		✅️ (Bonus) Dynamic creation of the board sizes and shapes.
+		✅️ (Bonus) Tiles with different shapes (Ex: Hexagon).
+	
+	-> Players
+		✅️ The game needs 2 players turn-based (can use the same keys)
+		❌️ (Bonus) vs AI mode.
+		❌️ (Bonus) Choose between AI or 2 local players on main menu.
+	
+	-> Characters
+		✅️ Can be the same prefab (Basic place holders or basic free assets).
+		✅️ Each character has X health and Y attack points (X and Y is defined by dev).
+		❌️ (Bonus) Characters with differents attributs or styles.
+		❌️ (Bonus) Character's choose option for each player on main menu.
+	
+	-> Turns
+		✅️ Players can move orthogonally to each adjacent tile upon mouse click.
+			✅️ A characther can not occupy tiles where the other is at.
+			❌️ (Bonus) Highlight possible movements from current tile.
+		✅️ Each player has 3 availables moves per turn.
+			✅️ Provide feedback for the number of available moves.
+		✅️ The turn ends and change when finished the number of moves.
+	
+	-> Camera
+		✅️ A system that follows the turn player.
+	
+	-> Tiles
+		✅️ Each tile must be populated with a collectable item.
+			✅️ Two tiles must be free at the beginning to place characters.
+		✅️ The start point can be pre-defined.
+			(Bonus) Dynamic starting points.
+	
+	-> Collectables
+		✅️ There must be three of the available collectables:
+			✅️ Gain extra move for the turn.
+			✅️ Gain extra attack for the rest of the turn.
+			✅️ Recover some health.
+			❌️ Gain extra dices for the rest of the turn.
+		✅️ Players collect each one by walking over its tile.
+		✅️ If there are 10% of collectables left, the game auto-fills any available tile with a new collectable.
+		(Bonus) Collectable with tiers with different amounts of gain (3 types for each).
+	
+	-> Battle
+		✅️ Battle happens when a player is adjacent to the other orthogonally after moving.
+			✅️ If a battle happens on the last move of the turn, the turn only ends after the battle.
+			✅️ (Bonus) Diagonal battles.
+		✅️ The battle is decided over auto dice roll.
+			✅️ Players have dices of different colors (blue x red).
+		✅️ Each dice is six-sided.
+			(Bonus) Different dices (twelve-sided, ten-sided etc).
+		✅️ Each player rolls 3 dices.
+			✅️ Battle is resolved by comparing pairs of dices between players, ordered by their value with higher coming first.
+				(5, 6, 2) X (5, 4, 3)
+				6 X 5
+				5 X 4
+				2 X 3
+				(5, 6, 2) wins.
+		✅️ If the values are the same the turn player wins the comparison.
+		✅️ The player with more individual dice wins, wins the battle.
+			The loser suffers damage to their health points equal to the winner’s attack power.
+		❌️ At least one sound is required for any action in game like moving, attacking, collecting etc.
+			(Bonus) All actions has its own sound.
+		❌️ At least one particle effect is required for any action in game like moving, attacking, collecting etc.
+			(Bonus) All actions has its own effects.
+	
+	-> General Rules
+		✅️ The game ends when one player runs out of health.
+		✅️ Display an end game screen with the winner, a replay button and a back to menu button.
+	
+	-> (Bonus) Profiling
+		❌️ Run the profiler tool from Unity to check the performance of the game.
+		❌️ Map out the problematic sections in a document explaining the problems founded.
+		❌️ Explain how I solved them.
+		
+
+Hours tracking:
+	🕖️ -> 19:00 until 20:00 - 18/10/2024:
+		Starting the dev notes,
+		Prioriting the tasks,
+		Creating the github's repository,
+		Installing unity editor version 2019.3.5f1.
+	
+	🕖️ -> 20:00 until 21:00 - 18/10/2024:
+		Initializing the starting 3D project,
+		Testing linux setup unity system is working,
+		Testing mono setup,
+		I was unable to use the Unity version 2019.3.5f1 in my linux setup (I am using the actual LFS 2022.3.50f1),
+		Adding initial project on github.
+		
+	🕖️ -> 22:00 until 00:00 - 18/10/2024:
+		Creating initial game menu,
+		Selecting character's game assets,
+		Selecting sounds.
+		
+	🕖️ -> 13:00 until 16:00 - 19/10/2024:
+		Creating board game map design,
+		Creating camera following player behaviour,
+		Creating basic camera rotation movement to test the map.
+		
+	🕖️ -> 16:00 until 18:00 - 19/10/2024:
+		Creating player's click movement behaviour,
+		Creating initial turn-based system.
+		
+	🕖️ -> 18:00 - 22:00 - 19/10/2024:
+		Dice system,
+		Initial battle system.
+		
+	🕖️ -> 09:00 - 11:00 - 20/10/2024:
+		Dice face check,
+		Dice animation.
+		
+	🕖️ -> 11:00 - 20:00 - 20/10/2024:
+		Finish battle system,
+		Added player's attributes,
+		Added attack system,
+		Game UI.
+		
+	🕖️ -> 20:00 - 00:00 - 20/10/2024:
+		Collectables.
+		
+	🕖️ -> 00:00 - 02:00 - 21/10/2024:
+		Final adjusts,
+		Refactor,
+		Release V1.0.
+	
+
+Pull Requests: 
+	-> [FEATURE] Main Menu and Basic Game Flow #1 - https://github.com/leandro-santi/unity-board-game/pull/1
+	-> [FEATURE] Board Map and Camera Transitions #2 - https://github.com/leandro-santi/unity-board-game/pull/2
+	-> [FEATURE] Player's Movement and Turn-based Game System #3 - https://github.com/leandro-santi/unity-board-game/pull/3
+	-> [FEATURE] Dice System and Spawner #4 - https://github.com/leandro-santi/unity-board-game/pull/4
+	-> [FEATURE] Battle System and Game UI #5 - https://github.com/leandro-santi/unity-board-game/pull/5
+	-> [FEATURE] Collectibles Objects #6 - https://github.com/leandro-santi/unity-board-game/pull/6
+	-> [RELEASE] Game V1.0 #7 - https://github.com/leandro-santi/unity-board-game/pull/7
+	
+
