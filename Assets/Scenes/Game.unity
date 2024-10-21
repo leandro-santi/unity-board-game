@@ -4482,11 +4482,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5083950304739429905, guid: 7fda7ed5219aa6f7996bdc174aaa4944, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5778449972534216603, guid: 7fda7ed5219aa6f7996bdc174aaa4944, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6896001505507846040, guid: 7fda7ed5219aa6f7996bdc174aaa4944, type: 3}
       propertyPath: m_LocalPosition.x
