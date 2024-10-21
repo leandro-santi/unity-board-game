@@ -8,8 +8,15 @@ public class TurnCollectible : Collectible
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<Player>().AddExtraTurn(turnIncrease);
-        // PlayEffect();
-        Destroy(gameObject);
+        Player player = other.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            other.gameObject.GetComponent<Player>().AddExtraTurn(turnIncrease);
+
+            // PlayEffect();
+
+            gameObject.SetActive(false);
+            Destroy(gameObject, 0.5f);
+        }
     }
 }

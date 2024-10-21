@@ -8,8 +8,16 @@ public class AttackPowerCollectible : Collectible
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<Player>().GainAttackPower(powerIncrease);
-        // PlayEffect();
-        Destroy(gameObject);
+        Player player = other.gameObject.GetComponent<Player>();
+
+        if (player != null)
+        {
+            player.GainAttackPower(powerIncrease);
+
+            // PlayEffect();
+
+            gameObject.SetActive(false);
+            Destroy(gameObject, 0.5f);
+        }
     }
 }

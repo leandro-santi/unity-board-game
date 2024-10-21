@@ -9,8 +9,15 @@ public class HealthCollectible : Collectible
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<Player>().Heal(healthIncrease);
-        // PlayEffect();
-        Destroy(gameObject);
+        Player player = other.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            other.gameObject.GetComponent<Player>().Heal(healthIncrease);
+
+            // PlayEffect();
+
+            gameObject.SetActive(false);
+            Destroy(gameObject, 0.5f);
+        }
     }
 }

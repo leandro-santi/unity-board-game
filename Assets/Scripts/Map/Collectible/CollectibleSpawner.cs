@@ -9,7 +9,7 @@ public class CollectibleSpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnCollectibles();
+        Invoke("SpawnCollectibles", 0.5f);
     }
 
     private void SpawnCollectibles()
@@ -27,15 +27,12 @@ public class CollectibleSpawner : MonoBehaviour
                 int row = Mathf.RoundToInt((obj.transform.position.z - boardOffsetZ) / tileSize);
                 int column = Mathf.RoundToInt((obj.transform.position.x - boardOffsetX) / tileSize);
 
-                if (row > 0 && row < rows - 1)
-                {
-                    GameObject selectedPrefab = GetRandomCollectiblePrefab();
 
-                    Vector3 spawnPosition = obj.transform.position + new Vector3(0, 0.75f, 0);
+                GameObject selectedPrefab = GetRandomCollectiblePrefab();
 
-                    Instantiate(selectedPrefab, spawnPosition, Quaternion.identity,
-                        obj.transform);
-                }
+                Vector3 spawnPosition = obj.transform.position + new Vector3(0, 0.75f, 0);
+
+                Instantiate(selectedPrefab, spawnPosition, Quaternion.identity, obj.transform);
             }
         }
     }

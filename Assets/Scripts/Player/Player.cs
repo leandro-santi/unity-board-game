@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
+        _currentHealth = Mathf.Max(0, _currentHealth);
 
         UpdateHpText();
 
@@ -42,7 +43,7 @@ public class Player : MonoBehaviour
 
         UpdatePowerText();
     }
-    
+
     public void AddExtraTurn(int turn)
     {
         // attackPower += attack;

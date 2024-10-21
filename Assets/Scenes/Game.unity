@@ -4480,6 +4480,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5083950304739429905, guid: 7fda7ed5219aa6f7996bdc174aaa4944, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778449972534216603, guid: 7fda7ed5219aa6f7996bdc174aaa4944, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6896001505507846040, guid: 7fda7ed5219aa6f7996bdc174aaa4944, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4523,6 +4531,10 @@ PrefabInstance:
     - target: {fileID: 7712388505432602369, guid: 7fda7ed5219aa6f7996bdc174aaa4944, type: 3}
       propertyPath: m_Name
       value: Board
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712388505432602369, guid: 7fda7ed5219aa6f7996bdc174aaa4944, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9100321946584138735, guid: 7fda7ed5219aa6f7996bdc174aaa4944, type: 3}
       propertyPath: probability
