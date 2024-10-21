@@ -4,9 +4,9 @@ public class BoardModifier : MonoBehaviour
 {
     [SerializeField] private GameObject[] additionalPrefabs;
     [SerializeField] private float probability;
-    [SerializeField] private int rows = 16; // Quantidade de linhas do tabuleiro
-    [SerializeField] private int columns = 16; // Quantidade de colunas do tabuleiro
-    [SerializeField] private float tileSize = 1f; // Tamanho de cada tile
+    [SerializeField] private int rows = 16;
+    [SerializeField] private int columns = 16;
+    [SerializeField] private float tileSize = 1f;
 
     private void Start()
     {

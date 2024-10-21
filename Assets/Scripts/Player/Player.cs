@@ -36,6 +36,20 @@ public class Player : MonoBehaviour
         UpdateHpText();
     }
 
+    public void GainAttackPower(int attack)
+    {
+        attackPower += attack;
+
+        UpdatePowerText();
+    }
+    
+    public void AddExtraTurn(int turn)
+    {
+        // attackPower += attack;
+        Debug.Log("Added extra turn");
+        UpdatePowerText();
+    }
+
     public int GetCurrentAttackPower()
     {
         return attackPower;
