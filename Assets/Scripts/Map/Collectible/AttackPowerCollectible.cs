@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackPowerCollectible : Collectible
@@ -14,7 +12,7 @@ public class AttackPowerCollectible : Collectible
         {
             player.GainAttackPower(powerIncrease);
 
-            // PlayEffect();
+            // PlayEffect(); -> Future effects implementation
 
             gameObject.SetActive(false);
             Destroy(gameObject, 0.5f);

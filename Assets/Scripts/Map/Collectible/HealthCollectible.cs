@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthCollectible : Collectible
@@ -14,7 +11,7 @@ public class HealthCollectible : Collectible
         {
             other.gameObject.GetComponent<Player>().Heal(healthIncrease);
 
-            // PlayEffect();
+            // PlayEffect(); // PlayEffect(); -> Future effects implementation
 
             gameObject.SetActive(false);
             Destroy(gameObject, 0.5f);

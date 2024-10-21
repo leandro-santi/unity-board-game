@@ -11,16 +11,14 @@ public class CollectibleSpawner : MonoBehaviour
 
     private void Start()
     {
+        // This invokes repeating aims to handler the spawn of the collectibles
+        // and also the check of 10% collectibles remaining
         InvokeRepeating("CheckAndSpawnCollectibles", 0.5f, 5f);
     }
 
     private void CheckAndSpawnCollectibles()
     {
         int currentCollectibles = FindObjectsOfType<Collectible>().Length;
-
-        Debug.Log(currentCollectibles);
-
-        Debug.Log(_initialCollectiblesValue);
 
         if (currentCollectibles <= ((_initialCollectiblesValue / 10))) // 10% of the initial value
         {
@@ -33,16 +31,10 @@ public class CollectibleSpawner : MonoBehaviour
         int tileLayer = LayerMask.NameToLayer("Tile");
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
 
-        float boardOffsetX = -(columns / 2f) * tileSize + tileSize / 2f;
-        float boardOffsetZ = -(rows / 2f) * tileSize + tileSize / 2f;
-
         foreach (GameObject obj in allObjects)
         {
             if (obj.layer == tileLayer)
             {
-                int row = Mathf.RoundToInt((obj.transform.position.z - boardOffsetZ) / tileSize);
-                int column = Mathf.RoundToInt((obj.transform.position.x - boardOffsetX) / tileSize);
-
                 if (!IsCollectiblePresent(obj.transform.position))
                 {
                     GameObject selectedPrefab = GetRandomCollectiblePrefab();
@@ -58,9 +50,11 @@ public class CollectibleSpawner : MonoBehaviour
 
     private bool IsCollectiblePresent(Vector3 position)
     {
+        // This aims controll the possibility to spawn in a occupied place
         Collider[] hitColliders = Physics.OverlapSphere(position, 0.5f);
         foreach (var hitCollider in hitColliders)
         {
+            // If it has something colliding as a Collectible or Player
             if (hitCollider.GetComponent<Collectible>() != null || hitCollider.GetComponent<Player>() != null)
             {
                 return true;

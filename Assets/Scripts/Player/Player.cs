@@ -27,7 +27,8 @@ public class Player : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            GameController.Instance.onPlayerWin?.Invoke((playerIndex) % 2);
+            // If the player die, It calls the event passing its opponent as the winner
+            GameController.Instance.onPlayerWin?.Invoke((playerIndex) % 2); // Can be 0 (Player 1) or 1 (Player 2)
         }
     }
 
@@ -46,6 +47,9 @@ public class Player : MonoBehaviour
         UpdatePowerText();
     }
 
+    // I think I understand right the test laws but
+    // This function aims to reset the AttackPower after
+    // The player got many power collectibles and its turn is over
     public void ResetAttackPower()
     {
         attackPower = _maxAttackPower;

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -28,9 +27,10 @@ public class CameraController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
+    // Changing the camera's player target
     public void SwitchTarget()
     {
-        _currentTargetIndex = (_currentTargetIndex + 1) % targets.Length;
+        _currentTargetIndex = (_currentTargetIndex + 1) % targets.Length; // Can be 0 or 1
 
         offset.z *= -1;
     }
